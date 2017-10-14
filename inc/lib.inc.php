@@ -17,28 +17,28 @@ function addItemToCatalog($title, $author, $pubyear, $price) {
 }
 
 // Выбрка всех товаров
-function selectAllItems(){
+function selectAllItems() {
     global $link;
     $sql = "SELECT id, title, author, pubyear, price FROM catalog WHERE 1";
     $result = mysqli_query($link, $sql);
-        if( !$result ){
-            return false;
-        } else {
+    if (!$result) {
+        return false;
+    } else {
         $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
         mysqli_free_result($result);
         return $items;
-        }
+    }
 }
 
 // Сохранение корзины
-function saveBasket(){
+function saveBasket() {
     global $basket;
     $basket = base64_encode(serialize($basket));
     setcookie('basket', $basket, 0x7FFFFFFF);
 }
 
 // Создаем корзину
-function basketInit(){
+function basketInit() {
     global $basket;
     global $count;
 
@@ -53,7 +53,7 @@ function basketInit(){
 }
 
 //Добавление в корзину
-function add2Basket($id){
+function add2Basket($id) {
     global $basket;
     $basket[$id] = 1;
     saveBasket();
@@ -65,23 +65,23 @@ function myBasket() {
     global $basket;
     $goods = array_keys($basket);
     array_shift($goods); // 0 orderid, исключаем, т.к. нам нужны тольк товары
-        if (!$goods) {  // Проверяем что пользователь просто зашел в корзину не добавив ни одной книги
-            return false;
-        }
+    if (!$goods) {  // Проверяем что пользователь просто зашел в корзину не добавив ни одной книги
+        return false;
+    }
     $ids = implode(",", $goods);
     $sql = "SELECT id, author, title, pubyear, price FROM catalog WHERE id IN ($ids)";
-        if ( !$result = mysqli_query($link, $sql) ) {
-            return false;
-        }
+    if (!$result = mysqli_query($link, $sql)) {
+        return false;
+    }
     $items = result2Array($result);
     mysqli_free_result($result);
     return $items;
 }
 
-function result2Array($data){
+function result2Array($data) {
     global $basket;
     $arr = [];
-    while($row = mysqli_fetch_assoc($data)){
+    while ($row = mysqli_fetch_assoc($data)) {
         $row['quantity'] = $basket[$row['id']];
         $arr[] = $row;
     }
@@ -112,7 +112,7 @@ function safeOrder($datetime) {
               VALUES (?, ?, ?, ?, ?, ?, ?)';
     if (!mysqli_stmt_prepare($stmt, $sql))
         return false;
-    foreach($goods as $item){
+    foreach ($goods as $item) {
         mysqli_stmt_bind_param($stmt, "ssiiisi",
             $item['title'], $item['author'],
             $item['pubyear'], $item['price'],
@@ -126,9 +126,9 @@ function safeOrder($datetime) {
     return true;
 }
 
-function getOrders(){
+function getOrders() {
     global $link;
-    if(!is_file(ORDERS_LOG))
+    if (!is_file(ORDERS_LOG))
         return false;
     /* Получаем в виде массива персональные данные пользователей из файла */
     $orders = file(ORDERS_LOG);
@@ -153,7 +153,7 @@ function getOrders(){
                 FROM orders
                 WHERE orderid = '$orderid' AND datetime = $date";
         /* Получение результата выборки */
-        if(!$result = mysqli_query($link, $sql))
+        if (!$result = mysqli_query($link, $sql))
             return false;
         $items = mysqli_fetch_all($result, MYSQLI_ASSOC);
         mysqli_free_result($result);

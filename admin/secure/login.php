@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     $pw = trim(strip_tags($_POST["pw"]));
    $ref = trim(strip_tags($_GET["ref"]));
     if(!$ref)
-        $ref = '/eshop/admin/';
+        $ref = '/admin/'; //указать путь к админке
     if($login and $pw){
         if($result = userExists($login)){
             list($_, $hash) = explode(':', $result);
