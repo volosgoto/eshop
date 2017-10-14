@@ -19,6 +19,8 @@ if (isset($_GET['logout'])) {
     <li><a href='orders.php'>Просмотр готовых заказов</a></li>
     <li><a href='secure/create_user.php'>Добавить пользователя</a></li>
     <li><a href='index.php?logout'>Завершить сеанс</a></li>
+    <br>
+    <li> <a href="../catalog.php"> На главную</a> </li>
 </ul>
 </body>
 </html>

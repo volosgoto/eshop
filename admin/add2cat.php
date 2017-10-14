@@ -14,6 +14,8 @@ require "secure/session.inc.php";
     <p>Год издания: <input type="text" name="pubyear" size="4">
     <p>Цена: <input type="text" name="price" size="6"> руб.
     <p><input type="submit" value="Добавить">
+
+    <p><a href="../catalog.php"> На главную</a> </li></p>
 </form>
 </body>
 </html>

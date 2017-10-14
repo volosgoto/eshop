@@ -53,8 +53,7 @@ if (!myBasket()) {
 <p>Всего товаров в корзине на сумму: <b><?php echo $sum; ?> </b> руб. </p>
 
 <div align="center">
-    <input type="button" value="Оформить заказ!"
-           onClick="location.href='orderform.php'"/>
+    <input type="button" value="Оформить заказ!" onClick="location.href='orderform.php'"/>
 </div>
 
 </body>

@@ -51,5 +51,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			<button type="submit">Войти</button>
 		</div>	
 	</form>
-</body>
+    <a href="../../catalog.php"> На главную</a>
+   </body>
+
 </html>

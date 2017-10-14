@@ -29,6 +29,7 @@ $goods = selectAllItems();
             <td><a href='add2basket.php?id=<?php echo $item['id']; ?>'>В корзину</a></td>
         </tr>
     <?php } ?>
-</table>
+    </table>
+<p><a href="/admin/"> Админка</a></p>
 </body>
 </html>
